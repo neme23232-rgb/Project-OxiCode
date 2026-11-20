@@ -1,12 +1,13 @@
 <div align="center">
   <img src="assets/icon.png" alt="oxicode logo" width="96" height="96" />
   <h1>oxicode</h1>
-  <p><strong>Быстрый и легковесный терминальный AI-агент на Rust.</strong></p>
+  <p><strong>Быстрый и лёгкий терминальный AI-агент на Rust.</strong></p>
   <p>
     <img src="https://img.shields.io/badge/language-Rust-8b5f68?style=flat-square" alt="Rust" />
     <img src="https://img.shields.io/badge/interface-TUI-7b9b83?style=flat-square" alt="TUI" />
     <img src="https://img.shields.io/badge/styles-OxiCode%20%7C%20Antigravity-557a95?style=flat-square" alt="Styles" />
   </p>
+  <p><strong>Русский</strong> | <a href="README.en.md">English</a></p>
 </div>
 
 ## Что это
@@ -24,7 +25,7 @@
 
 ## Скачать
 
-Скомпилируйте единственный исполняемый файл `oxicode.exe` через Cargo и установите его в `PATH` командой `oxicode --install`. Остальные каталоги (`src`, `assets`, `Cargo.toml`) требуются только для сборки.
+Скомпилируйте единственный исполняемый файл `oxicode.exe` через Cargo и установите его в `PATH` командой `oxicode --install`, либо загрузите готовую сборку на странице [Releases](../../releases). Остальные каталоги (`src`, `assets`, `Cargo.toml`) требуются только для сборки.
 
 ## Быстрый старт
 

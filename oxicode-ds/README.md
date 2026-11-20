@@ -7,6 +7,7 @@
     <img src="https://img.shields.io/badge/platform-Windows%20%7C%20WebView2-7b9b83?style=flat-square" alt="Platform" />
     <img src="https://img.shields.io/badge/stack-Rust%20%2B%20Tauri%20v2-557a95?style=flat-square" alt="Stack" />
   </p>
+  <p><strong>Русский</strong> | <a href="README.en.md">English</a></p>
 </div>
 
 ## Что это

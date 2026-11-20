@@ -7,6 +7,7 @@
     <img src="https://img.shields.io/badge/Desktop-soon-8b5f68?style=flat-square" alt="Desktop Soon" />
     <img src="https://img.shields.io/badge/rust-2024-557a95?style=flat-square" alt="Rust 2024" />
   </p>
+  <p><strong>Русский</strong> | <a href="README.en.md">English</a></p>
 </div>
 
 ## Что это
