@@ -1,70 +1,65 @@
 <div align="center">
-  <img src="oxicode-cli/assets/icon.png" alt="oxicode" width="96" height="96" />
-  <h1>oxicode</h1>
-  <p><strong>Быстрый и лёгкий терминальный AI-агент для разработки на Rust.</strong></p>
+  <img src="oxicode-cli/assets/icon.png" alt="Project OxiCode" width="96" height="96" />
+  <h1>Project OxiCode</h1>
+  <p><strong>Быстрый AI-агент для разработки на Rust в двух редакциях: CLI и Desktop.</strong></p>
   <p>
-    <img src="https://img.shields.io/badge/rust-2024-8b5f68?style=flat-square" alt="Rust 2024" />
-    <img src="https://img.shields.io/badge/cli-ratatui-7b9b83?style=flat-square" alt="Ratatui TUI" />
-    <img src="https://img.shields.io/badge/providers-10-557a95?style=flat-square" alt="10 Providers" />
+    <img src="https://img.shields.io/badge/CLI-v0.1.0%20ready-7b9b83?style=flat-square" alt="CLI Ready" />
+    <img src="https://img.shields.io/badge/Desktop-soon-8b5f68?style=flat-square" alt="Desktop Soon" />
+    <img src="https://img.shields.io/badge/rust-2024-557a95?style=flat-square" alt="Rust 2024" />
   </p>
 </div>
 
 ## Что это
 
-`oxicode` — автономный консольный и TUI-агент для работы с кодом в одном бинарном файле (`oxicode.exe`) без внешних зависимостей и дополнительных файлов рядом.
+**Project OxiCode** — рабочее пространство AI-инструментов для разработки на базе общего Rust-ядра [`oxicode-core`](oxicode-core). Проект объединяет лёгкий автономный терминальный клиент и разрабатываемое настольное приложение в одном репозитории.
 
 ## Возможности
 
-- **Два режима работы** — интерактивный TUI (`oxicode`) и headless-режим для скриптов, конвейеров и CI (`oxicode "..."`, `--json`, `-t/--timeout`).
-- **Стили интерфейса (`/style`)** — классический `OxiCode` с анимированной 3D-лисой, компактный `Antigravity` со статичной пиксельной лисой и строкой `> `, а также минималистичный текстовый логотип.
-- **15 цветовых тем (`/themes`)** — `beige`, `classic`, `monochrome` (чёрно-белый интерфейс, где цветом выделяются только изменения и диффы), `tokyo-night`, `github-dark`, `nord` и другие.
-- **Универсальная поддержка API** — OpenAI-совместимые эндпоинты (OpenRouter, DeepSeek, NVIDIA NIM, AnyModel, OpenCode Zen, Ollama, Custom), Anthropic Messages и Google Gemini с автоматическим повтором при временных сбоях.
-- **Инструменты кодинга** — `read_file`, `write_file`, `edit_file` (с поддержкой Windows CRLF), `list_files`, `glob`, `grep`, `bash` (UTF-8 вывод в PowerShell), откат и повтор правок (`/undo`, `/redo`).
-- **Режимы BUILD и PLAN** — переключение (`Tab`) между анализом и редактированием, авто-подтверждение (`Shift+Tab` / `-y`), вложенная навигация в меню с возвратом назад по `Esc`.
-- **Выделение текста и буфер обмена** — нативное выделение и копирование мышью в терминале включено по умолчанию (`/mouse` или настройка `Mouse Capture` для переключения на колесо прокрутки).
-- **Расширяемость и сессии** — загрузка `AGENTS.md` / `CLAUDE.md` / `GEMINI.md`, локальные навыки, плагины, кастомные команды, MCP-серверы по stdio, `@`-файлы, `!`-шелл, `/compact`, `/sessions` (`-c`, `--id`) и экспорт в Markdown.
+- **OxiCode CLI (`oxicode-cli`)** — готовый автономный бинарный файл (`oxicode.exe`) с интерактивным TUI, стилями `OxiCode` (3D-лиса) и `Antigravity` (статичная пиксельная лиса), 15 темами (включая `monochrome`), нативным выделением текста и headless-режимом ([подробнее](oxicode-cli/README.md)).
+- **OxiCode Desktop (`oxicode-ds`)** — настольная версия на базе Tauri v2 + WebView2 с карточками вызовов инструментов, боковыми панелями сессий и встроенным просмотром diff (в активной разработке, [подробнее](oxicode-ds/README.md)).
+- **Единое ядро (`oxicode-core`)** — 10 провайдеров API (OpenAI-совместимые, Anthropic, Google Gemini), инструменты кодинга (`read_file`, `write_file`, `edit_file`, `list_files`, `glob`, `grep`, `bash`), откат `/undo` и `/redo`, MCP-серверы, скилы и плагины.
 
 ## Скачать
 
-Актуальные сборки бинарного файла доступны на странице [Releases](../../releases) или собираются из исходников через Cargo. Единственный файл, нужный для запуска — `oxicode.exe`.
+Выберите нужную редакцию проекта:
+
+| Редакция | Описание | Статус | Загрузка |
+| --- | --- | --- | --- |
+| **OxiCode CLI** (`oxicode-cli`) | Терминальный TUI/CLI-агент в одном бинарнике | **Доступна** (`v0.1.0`) | [Скачать из Releases](../../releases) |
+| **OxiCode Desktop** (`oxicode-ds`) | Десктопный клиент на Tauri v2 + WebView2 | **Скоро (`Soon`)** | Ожидается в будущих релизах |
 
 ## Быстрый старт
 
-Сборка и установка в `PATH`:
+Сборка и запуск актуальной CLI-версии из исходников:
 
 ```bash
+# Сборка и установка oxicode в PATH
 cargo build --release -p oxicode
 oxicode --install
-```
 
-Запуск и базовая работа:
-
-```bash
-# Интерактивный TUI
+# Запуск интерактивного TUI
 oxicode
 
 # Настройка провайдера, модели, стиля и темы
 oxicode --config
+```
 
-# Диагностика конфигурации и подключений
+Диагностика, однократный запрос и пайпы:
+
+```bash
 oxicode --doctor
-
-# Однократный запрос с авто-подтверждением правок
 oxicode -y "Найди и исправь предупреждения clippy"
-
-# Работа через конвейер (piped stdin) и JSON-поток
 git diff | oxicode --plan "Проверь изменения на ошибки"
-oxicode --json "Перечисли модули проекта"
 ```
 
 ## Требования
 
+- **Запуск OxiCode CLI** — Windows, Linux или macOS с терминалом, поддерживающим UTF-8 и TrueColor; API-ключ провайдера либо локальный сервер Ollama.
 - **Сборка из исходников** — Rust toolchain с поддержкой `edition = "2024"`.
-- **Запуск бинарника** — терминал с поддержкой UTF-8 и 24-bit TrueColor (Windows Terminal, PowerShell, Alacritty, Kitty, iTerm2); API-ключ выбранного провайдера либо локальный сервер Ollama.
 
 ## Удаление
 
-Удалите установленный бинарный файл и при необходимости каталог исходников и конфигурации:
+Удалите установленный бинарный файл и при необходимости каталоги проекта и настроек:
 
-- **Windows** — удалите `oxicode.exe` (в `%USERPROFILE%\.cargo\bin\oxicode.exe`), каталог проекта (например, `F:\Project OxiCode`) и каталог настроек `%APPDATA%\oxicode`.
+- **Windows** — удалите `oxicode.exe` (`%USERPROFILE%\.cargo\bin\oxicode.exe`), каталог проекта (например, `F:\Project OxiCode`) и настройки `%APPDATA%\oxicode`.
 - **Linux / macOS** — удалите бинарник `oxicode`, каталог проекта и `~/.config/oxicode`.
