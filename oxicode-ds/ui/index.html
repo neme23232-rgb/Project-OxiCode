@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>oxicode</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <!-- Antigravity-inspired Left Sidebar -->
+      <aside id="left-sidebar" class="sidebar left-sidebar">
+        <div class="sidebar-top">
+          <div class="sidebar-brand">
+            <img src="icon.png" alt="oxicode" class="brand-icon" />
+            <span class="brand-title">oxicode</span>
+          </div>
+          <button id="btn-new-task" class="nav-primary-btn" type="button" title="New conversation (Ctrl+N)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M8 3.2v9.6M3.2 8h9.6" stroke-linecap="round" />
+            </svg>
+            <span>New Conversation</span>
+          </button>
+
+          <nav class="sidebar-nav" aria-label="Primary actions">
+            <button id="btn-nav-customizations" class="nav-item" type="button">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                <rect x="2.2" y="2.2" width="4.8" height="4.8" rx="1.2" />
+                <rect x="9" y="2.2" width="4.8" height="4.8" rx="1.2" />
+                <rect x="2.2" y="9" width="4.8" height="4.8" rx="1.2" />
+                <path d="M11.4 9v4.8M9 11.4h4.8" stroke-linecap="round" />
+              </svg>
+              <span>Customizations</span>
+            </button>
+            <button id="btn-open-connect" class="nav-item" type="button">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                <path d="M6.2 9.8l3.6-3.6M5.4 6.6L3.6 8.4a2.4 2.4 0 003.4 3.4l1.8-1.8M7.2 6l1.8-1.8a2.4 2.4 0 013.4 3.4l-1.8 1.8" stroke-linecap="round" />
+              </svg>
+              <span>Provider</span>
+              <span id="sidebar-provider-status" class="nav-meta">setup</span>
+            </button>
+          </nav>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="section-header-row">
+            <span class="section-label">Projects</span>
+            <button id="btn-open-dir" class="subtle-icon-btn" type="button" title="Switch workspace folder">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                <path d="M2 4.5a1.2 1.2 0 011.2-1.2h3l1.3 1.4h5.3A1.2 1.2 0 0114 5.9v5.8a1.2 1.2 0 01-1.2 1.2H3.2A1.2 1.2 0 012 11.7V4.5z" />
+              </svg>
+            </button>
+          </div>
+
+          <button id="btn-project-row" class="project-row" type="button" title="Click to switch project folder">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <path d="M2.2 4.6a1.1 1.1 0 011.1-1.1h2.8l1.2 1.3h5.4a1.1 1.1 0 011.1 1.1v5.6a1.1 1.1 0 01-1.1 1.1H3.3a1.1 1.1 0 01-1.1-1.1V4.6z" />
+            </svg>
+            <span id="work-dir-name" class="project-name">workspace</span>
+            <span id="git-branch" class="branch-chip hidden"></span>
+          </button>
+
+          <div id="session-list" class="session-list"></div>
+        </div>
+
+        <div class="sidebar-footer">
+          <button id="btn-open-settings" class="nav-item footer-settings-btn" type="button" title="Settings (Ctrl+,)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <circle cx="8" cy="8" r="2.2" />
+              <path d="M8 2.1v1.4M8 12.5v1.4M2.1 8h1.4M12.5 8h1.4M3.8 3.8l1 1M11.2 11.2l1 1M12.2 3.8l-1 1M4.8 11.2l-1 1" stroke-linecap="round" />
+            </svg>
+            <span>Settings</span>
+          </button>
+          <button id="btn-open-themes" class="subtle-icon-btn" type="button" title="Appearance & Themes">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <circle cx="8" cy="8" r="5.5" />
+              <path d="M8 2.5a5.5 5.5 0 000 11V2.5z" fill="currentColor" stroke="none" />
+            </svg>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main OpenCode-inspired Workspace Stage -->
+      <main class="main-column">
+        <header class="task-header">
+          <div class="header-left">
+            <button id="btn-toggle-left" class="chrome-icon-btn" type="button" title="Toggle sidebar">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                <rect x="2" y="2.5" width="12" height="11" rx="1.8" />
+                <path d="M5.8 2.5v11" />
+              </svg>
+            </button>
+            <div id="top-session-pill" class="session-pill">
+              <span class="session-pill-dot"></span>
+              <span id="task-title" class="task-title">New Conversation</span>
+            </div>
+            <button id="btn-top-new" class="chrome-icon-btn" type="button" title="New conversation">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M8 3.5v9M3.5 8h9" stroke-linecap="round" />
+              </svg>
+            </button>
+          </div>
+          <div class="header-actions">
+            <span id="ctx-meter" class="ctx-meter" title="Context window usage">0 / 64k</span>
+            <button id="btn-undo" class="chrome-btn" type="button" title="Undo last file change" disabled>Undo</button>
+            <button id="btn-redo" class="chrome-btn" type="button" title="Redo file change" disabled>Redo</button>
+            <button id="btn-compact" class="chrome-btn" type="button" title="Compact conversation context">Compact</button>
+            <button id="btn-export" class="chrome-btn" type="button" title="Export markdown">Export</button>
+            <button id="btn-toggle-right" class="chrome-icon-btn" type="button" title="Toggle Inspector panel">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                <rect x="2" y="2.5" width="12" height="11" rx="1.8" />
+                <path d="M10.2 2.5v11" />
+              </svg>
+              <span id="inspector-badge" class="inspector-badge hidden">0</span>
+            </button>
+          </div>
+        </header>
+
+        <section id="center-stage" class="center-stage is-empty">
+          <div id="welcome-view" class="welcome-view">
+            <div id="welcome-fox-wrap" class="welcome-fox-wrap">
+              <canvas id="welcome-fox" width="176" height="156" class="welcome-fox"></canvas>
+              <div class="welcome-brand-tag">oxicode</div>
+            </div>
+            <div id="welcome-wordmark" class="welcome-wordmark hidden">oxicode</div>
+            <p id="welcome-subtitle" class="welcome-sub">Ready to build</p>
+          </div>
+
+          <div id="messages-container" class="messages-container hidden"></div>
+
+          <div id="approval-bar" class="approval-bar hidden">
+            <span id="approval-text" class="approval-text">Tool requires approval</span>
+            <div class="approval-actions">
+              <button id="btn-approve-once" class="btn-primary" type="button">Approve</button>
+              <button id="btn-approve-all" class="btn-secondary" type="button">Auto-Approve All</button>
+              <button id="btn-reject" class="btn-danger" type="button">Deny</button>
+            </div>
+          </div>
+
+          <footer class="composer-wrap">
+            <!-- Autocomplete Popup -->
+            <div id="ac-popup" class="ac-popup hidden"></div>
+
+            <!-- Antigravity-style Add Context (+) Menu -->
+            <div id="plus-menu" class="plus-menu hidden" role="menu" aria-label="Add Context">
+              <div class="plus-menu-title">Add Context</div>
+              <button class="plus-menu-item" data-plus="files" type="button">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <path d="M5.5 7.5l4.2-4.2a2 2 0 112.8 2.8L7.2 11.4a3.2 3.2 0 01-4.5-4.5l4.6-4.6" stroke-linecap="round" />
+                </svg>
+                <span>Files</span>
+                <kbd>@</kbd>
+              </button>
+              <button class="plus-menu-item" data-plus="folder" type="button">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <path d="M2 4.5a1.2 1.2 0 011.2-1.2h3l1.3 1.4h5.3A1.2 1.2 0 0114 5.9v5.8a1.2 1.2 0 01-1.2 1.2H3.2A1.2 1.2 0 012 11.7V4.5z" />
+                </svg>
+                <span>Workspace Folder</span>
+              </button>
+              <button class="plus-menu-item" data-plus="actions" type="button">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <path d="M4.5 3.5l7 4.5-7 4.5V3.5z" stroke-linejoin="round" />
+                </svg>
+                <span>Slash Actions</span>
+                <kbd>/</kbd>
+              </button>
+              <button class="plus-menu-item" data-plus="shell" type="button">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <path d="M3.5 5l3 3-3 3M8.2 11h4.3" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>Run Shell Command</span>
+                <kbd>!</kbd>
+              </button>
+              <button class="plus-menu-item" data-plus="customizations" type="button">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1" />
+                  <rect x="9" y="2.5" width="4.5" height="4.5" rx="1" />
+                  <rect x="2.5" y="9" width="4.5" height="4.5" rx="1" />
+                  <rect x="9" y="9" width="4.5" height="4.5" rx="1" />
+                </svg>
+                <span>Skills &amp; Plugins</span>
+              </button>
+            </div>
+
+            <div class="composer-box">
+              <textarea
+                id="prompt-input"
+                class="prompt-input"
+                rows="2"
+                placeholder="Ask anything...  / for actions, @ for context"
+                spellcheck="false"
+                autofocus
+              ></textarea>
+              <div class="composer-toolbar">
+                <div class="toolbar-left">
+                  <button id="btn-plus-menu" class="composer-plus-btn" type="button" title="Add context (@, /, files, folder)">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                      <path d="M8 3.5v9M3.5 8h9" stroke-linecap="round" />
+                    </svg>
+                  </button>
+                  <button id="btn-model-pill" class="model-pill" type="button" title="Switch model or provider">
+                    <span id="composer-model-label">Connect provider</span>
+                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                      <path d="M3 4.5L6 7.5L9 4.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </button>
+                  <div class="mode-toggle" title="Tab switches between Build and Plan">
+                    <button class="mode-btn active" data-mode="build" type="button">Build</button>
+                    <button class="mode-btn" data-mode="plan" type="button">Plan</button>
+                  </div>
+                  <label class="auto-approve-label" title="Auto-approve write & shell tools">
+                    <input type="checkbox" id="chk-auto-approve" class="custom-chk" />
+                    <span>Auto</span>
+                  </label>
+                </div>
+                <div class="toolbar-right">
+                  <button id="btn-stop" class="stop-btn hidden" type="button">Stop</button>
+                  <button id="btn-send" class="send-btn" type="button" title="Send (Enter)">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                      <path d="M8 12.5V3.5M4.2 7.2L8 3.4l3.8 3.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="composer-meta-bar">
+              <button id="btn-footer-dir" class="meta-dir-btn" type="button" title="Change workspace directory">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <path d="M2 4.5a1.2 1.2 0 011.2-1.2h3l1.3 1.4h5.3A1.2 1.2 0 0114 5.9v5.8a1.2 1.2 0 01-1.2 1.2H3.2A1.2 1.2 0 012 11.7V4.5z" />
+                </svg>
+                <span id="work-dir-short">workspace</span>
+                <span id="footer-git-branch" class="meta-branch hidden"></span>
+              </button>
+              <button id="work-dir-path" class="meta-path-btn" type="button" title="Click to switch workspace"></button>
+            </div>
+          </footer>
+        </section>
+      </main>
+
+      <!-- Collapsible Right Inspector Panel (collapsed by default) -->
+      <aside id="right-sidebar" class="sidebar right-sidebar collapsed">
+        <div class="tabs-bar">
+          <button class="tab-btn active" data-tab="changes" type="button">Changes</button>
+          <button class="tab-btn" data-tab="files" type="button">Files</button>
+          <button class="tab-btn" data-tab="extensions" type="button">Customizations</button>
+        </div>
+
+        <div id="tab-changes" class="tab-pane active">
+          <div id="changed-files-list" class="panel-list"></div>
+          <div id="diff-viewer" class="diff-viewer hidden"></div>
+        </div>
+
+        <div id="tab-files" class="tab-pane">
+          <input id="file-filter" class="filter-input" type="text" placeholder="Filter workspace files..." />
+          <div id="workspace-files-list" class="panel-list"></div>
+        </div>
+
+        <div id="tab-extensions" class="tab-pane">
+          <div class="ext-group">
+            <div class="ext-head">
+              <span>Skills</span>
+              <button id="btn-new-skill" class="mini-btn" type="button">+ New</button>
+            </div>
+            <div id="skills-list" class="ext-list"></div>
+          </div>
+          <div class="ext-group">
+            <div class="ext-head">
+              <span>Plugins</span>
+              <button id="btn-new-plugin" class="mini-btn" type="button">+ New</button>
+            </div>
+            <div id="plugins-list" class="ext-list"></div>
+          </div>
+          <div class="ext-group">
+            <div class="ext-head"><span>Custom Commands</span></div>
+            <div id="commands-list" class="ext-list"></div>
+          </div>
+          <div class="ext-group">
+            <div class="ext-head">
+              <span>MCP Servers</span>
+              <button id="btn-reload-mcp" class="mini-btn" type="button">Reload</button>
+            </div>
+            <div id="mcp-list" class="ext-list"></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Full Two-Pane Settings Page (Antigravity + OpenCode + Cursor style) -->
+    <div id="settings-view" class="settings-view hidden" role="dialog" aria-modal="true" aria-label="Settings">
+      <aside class="settings-nav">
+        <button id="btn-settings-back" class="settings-back-btn" type="button">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M10 3.5L5.5 8 10 12.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span>Back to app</span>
+        </button>
+
+        <div class="settings-search-wrap">
+          <input id="settings-search" class="settings-search" type="text" placeholder="Search settings..." />
+        </div>
+
+        <nav class="settings-cats" id="settings-cats">
+          <button class="settings-cat-btn active" data-cat="general" type="button">General</button>
+          <button class="settings-cat-btn" data-cat="appearance" type="button">Appearance</button>
+          <button class="settings-cat-btn" data-cat="providers" type="button">Providers &amp; Models</button>
+          <button class="settings-cat-btn" data-cat="customizations" type="button">Customizations</button>
+          <button class="settings-cat-btn" data-cat="shortcuts" type="button">Shortcuts</button>
+        </nav>
+
+        <div class="settings-nav-footer">
+          <div id="settings-config-path" class="settings-path-note">config.toml</div>
+        </div>
+      </aside>
+
+      <section class="settings-main">
+        <div class="settings-main-inner">
+          <div class="settings-top-row">
+            <div>
+              <h2 id="settings-section-title" class="settings-h2">General</h2>
+              <p id="settings-section-desc" class="settings-sub">Configure agent execution, permissions, and defaults.</p>
+            </div>
+            <button id="btn-settings-close" class="chrome-icon-btn" type="button" title="Close Settings (Esc)">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round" />
+              </svg>
+            </button>
+          </div>
+
+          <div id="settings-content" class="settings-content"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Compact Modal Overlay (for directory picker / quick model switch) -->
+    <div id="modal-backdrop" class="modal-backdrop hidden">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-head">
+          <h3 id="modal-title">Modal</h3>
+          <button id="modal-close" class="chrome-icon-btn" type="button" aria-label="Close">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

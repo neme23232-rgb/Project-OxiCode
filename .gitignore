@@ -1,0 +1,12 @@
+/target/
+**/target/
+.cargo/config.toml
+**/.cargo/config.toml
+*.exe
+*.pdb
+*.backup
+oxicode_export_*.md
+.oxicode.toml
+oxicode-ds/.oxicode/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            bin: oxicode.exe
+            asset: oxicode-windows-x86_64.exe
+          - os: ubuntu-latest
+            bin: oxicode
+            asset: oxicode-linux-x86_64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build release binary
+        run: cargo build --release -p oxicode
+      - name: Stage release asset
+        shell: bash
+        run: cp "target/release/${{ matrix.bin }}" "${{ matrix.asset }}"
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ matrix.asset }}
